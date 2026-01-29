@@ -91,6 +91,87 @@ UPDATE pedidos
 SET custo_envio = 0.00
 WHERE id_pedido IN (5, 14, 33, 48, 67);
 
+CREATE TABLE lojas (
+    id_loja INT AUTO_INCREMENT PRIMARY KEY,
+    nome_loja VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    responsavel VARCHAR(100) NOT NULL
+);
+
+INSERT INTO lojas (nome_loja, cidade, responsavel) VALUES
+('Loja Centro Sorocaba', 'Sorocaba', 'João Pereira'),
+('Loja Shopping Iguatemi', 'Sorocaba', 'Mariana Alves'),
+('Loja Centro Votorantim', 'Votorantim', 'Carlos Mendes'),
+('Loja Centro Itu', 'Itu', 'Fernanda Lima'),
+('Loja Centro Salto', 'Salto', 'Ricardo Souza'),
+('Loja Centro Indaiatuba', 'Indaiatuba', 'Paulo Henrique'),
+('Loja Centro Campinas', 'Campinas', 'Renata Oliveira'),
+('Loja Shopping Dom Pedro', 'Campinas', 'Lucas Andrade'),
+('Loja Centro Valinhos', 'Valinhos', 'Aline Rocha'),
+('Loja Centro Vinhedo', 'Vinhedo', 'Bruno Martins'),
+('Loja Centro Boituva', 'Boituva', 'Diego Nunes'),
+('Loja Centro Tatuí', 'Tatuí', 'Patrícia Costa');
+
+
+ALTER TABLE pedidos
+ADD COLUMN id_loja INT;
+
+ALTER TABLE pedidos
+ADD CONSTRAINT fk_pedidos_lojas
+FOREIGN KEY (id_loja)
+REFERENCES lojas(id_loja);
+
+UPDATE pedidos SET id_loja = 1 WHERE id_pedido BETWEEN 1 AND 15;
+UPDATE pedidos SET id_loja = 2 WHERE id_pedido BETWEEN 16 AND 30;
+UPDATE pedidos SET id_loja = 3 WHERE id_pedido BETWEEN 31 AND 45;
+UPDATE pedidos SET id_loja = 4 WHERE id_pedido BETWEEN 46 AND 60;
+UPDATE pedidos SET id_loja = 5 WHERE id_pedido > 60;
+
+ALTER TABLE pedidos
+ADD COLUMN status_pedido VARCHAR(20),
+ADD COLUMN data_entrega DATE,
+ADD COLUMN devolvido BOOLEAN,
+ADD COLUMN custo_envio DECIMAL(10,2);
+
+UPDATE pedidos SET id_loja = 1 WHERE id_pedido BETWEEN 1 AND 15;
+UPDATE pedidos SET id_loja = 2 WHERE id_pedido BETWEEN 16 AND 30;
+UPDATE pedidos SET id_loja = 3 WHERE id_pedido BETWEEN 31 AND 45;
+UPDATE pedidos SET id_loja = 4 WHERE id_pedido BETWEEN 46 AND 60;
+UPDATE pedidos SET id_loja = 5 WHERE id_pedido > 60;
+
+UPDATE pedidos
+SET
+    situacao = 'Entregue',
+    data_entrega = DATE_ADD(data_pedido, INTERVAL 4 DAY),
+    devolvido = 0,
+    custo_envio = 30.00
+WHERE data_pedido < '2025-03-01';
+
+UPDATE pedidos
+SET
+    situacao = 'Em transporte',
+    custo_envio = 45.00
+WHERE data_pedido BETWEEN '2025-03-01' AND '2025-04-15';
+
+UPDATE pedidos
+SET
+    situacao = 'Processando',
+    custo_envio = 55.00
+WHERE data_pedido > '2025-04-15';
+
+UPDATE pedidos
+SET
+    situacao = 'Devolvido',
+    devolvido = 1
+WHERE id_pedido IN (7, 18, 33, 49);
+
+
+
+
+
+
+
+
 
 
 
