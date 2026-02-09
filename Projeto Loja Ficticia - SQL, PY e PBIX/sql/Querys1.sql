@@ -1,6 +1,4 @@
 USE LojaFicticia;
-# IDEIAS DE VISUALIZAÇÕES PARA TOMADA DE DECISÕES.
-
 
 
 # Faturamento:
@@ -9,7 +7,7 @@ create view Faturamento AS
         (sum(valor_total)) AS Faturamento
 from pedidos;
 
-select * from faturamento;
+
 # Produtos mais vendidos
 CREATE VIEW ProdutosMaisVendido AS
 SELECT
@@ -25,6 +23,7 @@ GROUP BY
 ORDER BY
     total_vendido DESC;
 
+
 select * from produtosmaisvendido;
 # Quantos produtos foram devolvidos
 create view QtdDevolução AS
@@ -33,6 +32,7 @@ create view QtdDevolução AS
     where devolvido = '1';
 
 select * from qtddevolução;
+
 
 # Prazo medio de entrega
 CREATE VIEW MediaPrazoEntrega AS
@@ -43,8 +43,8 @@ WHERE data_entrega IS NOT NULL;
 
 select * from mediaprazoentrega;
 
-#(faturamento = quantidade × preço_unitario)
 
+#(faturamento = quantidade × preço_unitario)
 CREATE VIEW ProdutoMaisFaturou AS
 SELECT
     pr.id_produto,
@@ -59,13 +59,14 @@ GROUP BY
 ORDER BY
     faturamento_produto DESC;
 
-#(lucro = faturamento − custo_envio)
 
+#(lucro = faturamento − custo_envio)
 CREATE VIEW LucroTotal AS
 SELECT
     SUM(valor_total - custo_envio) AS lucro_total
 FROM pedidos
 WHERE devolvido = FALSE;
+
 
 # Faturamento por loja (com responsável)
 CREATE VIEW FaturamentoPorLoja AS
@@ -81,6 +82,7 @@ GROUP BY
     l.id_loja,
     l.nome_loja,
     l.responsavel;
+
 
 # Lucro por loja (com responsável)
 CREATE VIEW LucroPorLoja AS
@@ -98,12 +100,53 @@ GROUP BY
     l.nome_loja,
     l.responsavel;
 
-DROP VIEW QtdDevolução;
-
+#qtd devoluções
 CREATE VIEW QtdDevolucoes AS
 SELECT COUNT(*) AS total_devolucoes
 FROM pedidos
 WHERE devolvido = TRUE;
+
+CREATE OR REPLACE VIEW QtdDevolucoesPorLoja AS
+SELECT
+    l.id_loja,
+    l.nome_loja,
+    COUNT(p.id_pedido) AS qtd_devolucoes
+FROM pedidos p
+JOIN lojas l
+    ON p.id_loja = l.id_loja
+WHERE p.devolvido = TRUE
+GROUP BY
+    l.id_loja,
+    l.nome_loja;
+
+select * from QtdDevolucoesPorLoja;
+
+CREATE OR REPLACE VIEW DevolucoesPorLojaProduto AS
+SELECT
+    l.id_loja,
+    l.nome_loja,
+    pr.id_produto,
+    pr.nome AS nome_produto,
+    SUM(ip.quantidade) AS qtd_produtos_devolvidos,
+    SUM(ip.quantidade * ip.preco_unitario) AS valor_total_devolvido
+FROM pedidos p
+JOIN lojas l
+    ON p.id_loja = l.id_loja
+JOIN itens_pedido ip
+    ON p.id_pedido = ip.id_pedido
+JOIN produtos pr
+    ON ip.id_produto = pr.id_produto
+WHERE p.devolvido = TRUE
+GROUP BY
+    l.id_loja,
+    l.nome_loja,
+    pr.id_produto,
+    pr.nome;
+
+
+
+SHOW TABLES;
+
 
 
 
