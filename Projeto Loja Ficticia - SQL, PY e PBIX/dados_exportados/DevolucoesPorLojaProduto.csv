@@ -1,0 +1,7 @@
+id_loja,nome_loja,id_produto,nome_produto,qtd_produtos_devolvidos,valor_total_devolvido
+1,Loja Centro Sorocaba,9,SSD 1TB,1,550
+2,Loja Shopping Iguatemi,1,Notebook Dell i5,1,4500
+2,Loja Shopping Iguatemi,4,Teclado Mecânico,1,350
+3,Loja Centro Votorantim,5,Monitor LG 24,1,900
+4,Loja Centro Itu,5,Monitor LG 24,1,900
+4,Loja Centro Itu,6,Headset Gamer,1,280
