@@ -2,17 +2,17 @@
 📊 Análise de Vendas de uma Loja — Projeto de Estudo
 📌 Sobre o projeto
 
-Este projeto foi desenvolvido como parte do meu processo de aprendizado em Análise de Dados, utilizando um cenário fictício de uma loja (física ou online) para simular situações reais de negócio.
+Este projeto foi desenvolvido como parte do meu processo de aprendizagem em Análise de Dados, utilizando um cenário fictício de uma loja (física ou online) para simular situações reais de negócio.
 
-O foco do projeto é entender os dados, estruturar um banco de dados coerente, criar regras de negócio com SQL e transformar essas informações em análises úteis para apoio à tomada de decisão.
+O foco do projeto é compreender os dados, estruturar um banco de dados de forma consistente, criar regras de negócio utilizando SQL e transformar essas informações em análises úteis para apoiar a tomada de decisão.
 
 🎯 Objetivos do projeto
 
 Entender a estrutura de um banco de dados relacional aplicado a vendas
 
-Criar análises e métricas de negócio utilizando SQL
+Criar análises de negócio utilizando SQL
 
-Utilizar Python para extração e organização dos dados
+Utilizar Python para extração, organização e padronização dos dados
 
 Construir visualizações e dashboards no Power BI
 
@@ -91,7 +91,7 @@ responsavel
 
 📈 Análises desenvolvidas (SQL)
 
-As regras de negócio foram implementadas através de views, facilitando o consumo dos dados no Power BI.
+As regras de negócio foram implementadas por meio de views, facilitando o consumo dos dados no Power BI.
 
 Faturamento total
 
@@ -113,29 +113,29 @@ Quantidade de pedidos devolvidos
 
 O Python foi utilizado para:
 
-Conectar ao banco de dados
+Conectar ao banco de dados MySQL
 
 Extrair os dados a partir das views SQL
 
-Realizar validações simples
+Realizar validações e padronização de valores
 
-Gerar arquivos CSV para consumo no Power BI
+Gerar arquivos CSV prontos para visualização no Power BI
 
 📊 Power BI
 
-O Power BI será utilizado para:
+O Power BI está sendo utilizado para:
 
 Criação de dashboards interativos
 
-Visualização de KPIs (faturamento, lucro, prazo de entrega, devoluções)
+Visualização de KPIs (faturamento, lucro, prazo médio de entrega e devoluções)
 
 Comparação de desempenho entre lojas e produtos
 
 🚧 Status do projeto
 
-🟡 Projeto em desenvolvimento
+🟡 Projeto em andamento
 
-Até o momento:
+Concluído até o momento:
 
 Banco de dados criado e populado
 
@@ -143,12 +143,12 @@ Modelagem validada
 
 Views SQL implementadas
 
-Pipeline inicial com Python iniciado
+Pipeline de extração e tratamento de dados em Python finalizado
 
 Próximas etapas:
 
-Finalizar extração dos dados com Python
+Finalização dos dashboards no Power BI
 
-Construção do dashboard no Power BI
+Análise final dos dados
 
-Análise final e geração de insights.
+Geração de insights para tomada de decisão
